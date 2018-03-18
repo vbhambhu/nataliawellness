@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div layout:fragment="content">
+
+    <h3>Edit tag</h3>
+
+    <form th:object="${tag}" method="POST">
+
+        <div class="row">
+            <div class="col-md-9">
+
+                <div class="form-group">
+                    <label>Slug</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('slug')} ? is-invalid" th:field="${tag.slug}" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Error</div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name')} ? is-invalid" th:field="${tag.name}" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-3">
+
+
+
+
+
+
+                <button type="submit" class="btn btn-success">Update</button>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+
+</div>
+</body>
+</html>

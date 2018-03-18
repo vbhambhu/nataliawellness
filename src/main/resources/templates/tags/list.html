@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div id="page" layout:fragment="content">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>All Tags</h3>
+        </div>
+        <div class="col-md-6">
+            <a href="/admin/tag/create" class="btn btn-primary float-right">Add new</a>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successMsg}">
+        <span th:text="${successMsg}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errorMsg}">
+        <span th:text="${errorMsg}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+
+    <table class="table datatable table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tag : ${tags}">
+            <td><a th:href="@{/admin/tag/edit(id=${tag.id})}" th:text="${tag.name}">...</a></td>
+            <td th:text="${tag.slug}">...</td>
+            <td><a th:href="@{/admin/tag/delete(id=${tag.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>
+</body>
+</html>

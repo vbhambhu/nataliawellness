@@ -65,10 +65,10 @@
 
                 <div class="form-group">
                     <label>Tags</label>
-                    <select multiple class="form-control select2_tags" th:field="${post.categories}">
-                        <option th:each="category : ${cats}"
-                                th:text="${category.name}"
-                                th:value="${category.id}"
+                    <select multiple class="form-control select2_tags" th:field="${post.tags}">
+                        <option th:each="tag : ${tags}"
+                                th:text="${tag.name}"
+                                th:value="${tag.id}"
                         >1</option>
 
                     </select>

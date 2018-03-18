@@ -33,15 +33,21 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/admin/category/create", method = RequestMethod.POST)
-    public String validateAndSavePost(Model model, @Valid Category category, BindingResult bindingResult){
+    public String validateAndSavePost(Model model, @Valid Category category,
+                                      BindingResult bindingResult, RedirectAttributes redirAttrs){
+
+        if(categoryService.findBySlug(category.getSlug()) != null){
+            bindingResult.rejectValue("slug", "slug","Category with this slug already exists.");
+        }
 
         if(bindingResult.hasErrors()){
             model.addAttribute("cats", categoryService.findAll());
             return "categories/create";
         }
 
-
         categoryService.create(category);
+        redirAttrs.addFlashAttribute("successMsg", "New category has been created successfully!");
+
         return "redirect:/admin/category/list";
 
     }
@@ -51,7 +57,7 @@ public class CategoryController {
 
         Category category = categoryService.getById(id);
         model.addAttribute("category", category);
-        model.addAttribute("cats", categoryService.findAllExceptId(id));
+        model.addAttribute("cats", categoryService.findAll());
         return "categories/edit";
     }
 
@@ -62,14 +68,25 @@ public class CategoryController {
                                  RedirectAttributes redirAttrs){
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("cats", categoryService.findAllExceptId(id));
+            model.addAttribute("cats", categoryService.findAll());
             return "categories/edit";
         }
 
 
         categoryService.create(category);
+        redirAttrs.addFlashAttribute("successMsg", "New category has been updated successfully!");
 
         return "redirect:/admin/category/list";
+    }
+
+
+    @RequestMapping(value = "/admin/category/delete", method = RequestMethod.GET)
+    public String editPost(@RequestParam Long id, RedirectAttributes redirectAttributes){
+
+        categoryService.deleteById(id);
+        redirectAttributes.addFlashAttribute("successMsg", "Category has been deleted successfully!");
+        return "redirect:/admin/category/list";
+
     }
 
 

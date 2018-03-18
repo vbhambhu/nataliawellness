@@ -3,6 +3,7 @@ package com.nataliawellness.nataliawellness.controllers;
 import com.nataliawellness.nataliawellness.entities.Post;
 import com.nataliawellness.nataliawellness.helpers.SiteHelper;
 import com.nataliawellness.nataliawellness.services.PostService;
+import com.nataliawellness.nataliawellness.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    TagService tagService;
+
 
     @RequestMapping(value = "/admin/post/list", method = RequestMethod.GET)
     public String listPosts(Model model){
@@ -29,9 +33,12 @@ public class PostController {
 
     @RequestMapping(value = "/admin/post/create", method = RequestMethod.GET)
     public String createPost(Model model, Post post){
-        model.addAttribute("cats", postService.getAllCategories());
+
         String jsFiles[] = {"select2.min.js","tinymce/tinymce.min.js"};
         model.addAttribute("jsFiles", jsFiles);
+
+        model.addAttribute("cats", postService.getAllCategories());
+        model.addAttribute("tags", tagService.findAll());
 
         return "posts/create";
     }
@@ -43,6 +50,8 @@ public class PostController {
             model.addAttribute("cats", postService.getAllCategories());
             String jsFiles[] = {"select2.min.js", "tinymce/tinymce.min.js"};
             model.addAttribute("jsFiles", jsFiles);
+
+            model.addAttribute("tags", tagService.findAll());
             return "posts/create";
         }
 
@@ -52,14 +61,16 @@ public class PostController {
     }
 
     @RequestMapping(value = "/admin/post/edit", method = RequestMethod.GET)
-    public String editPost(@RequestParam Long id, Model model){
+    public String editPost(@RequestParam Long id, Model model,Post post){
 
         String jsFiles[] = {"select2.min.js", "tinymce/tinymce.min.js"};
         model.addAttribute("jsFiles", jsFiles);
 
-        Post article = postService.getById(id);
-        model.addAttribute("post", article);
+
+        model.addAttribute("post", postService.getById(id));
         model.addAttribute("cats", postService.getAllCategories());
+        model.addAttribute("tags", tagService.findAll());
+
         return "posts/edit";
     }
 

@@ -40,16 +40,21 @@
         <tbody>
         <tr th:each="post : ${posts}">
             <td><a th:href="@{/admin/post/edit(id=${post.id})}" th:text="${post.title}">...</a></td>
-            <!--<td th:text="${post.author.name}">...</td>-->
+            <td><span th:text="${post.author.firstName}"></span> <span th:text="${post.author.lastName}"></span></td>
             <td>
 
-                <!--<span class="badge badge-primary" th:each="category : ${post.categories}" th:text="${category.name}"></span>-->
-            <!---->
+                <span class="badge badge-primary" th:each="category : ${post.categories}" th:text="${category.name}"></span>
+
             </td>
 
-            <td th:text="${post.status}">...</td>
-            <td th:text="${post.updatedAt}">...</td>
-            <td th:text="${post.createdAt}">...</td>
+            <td>
+                <div th:if="${post.status} == true">Published</div>
+                <div th:if="${post.status} == false">Draft</div>
+            </td>
+
+            <td th:text="${#dates.format(post.updatedAt, 'dd-MMM-yyyy HH:mm')}">...</td>
+            <td th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy HH:mm')}">...</td>
+
         </tr>
         </tbody>
     </table>

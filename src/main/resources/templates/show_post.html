@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<body>
+<div id="page" layout:fragment="content">
+
+    <h1 th:text="${post.title}"></h1>
+
+    <h3>Overview</h3>
+    <div th:text="${post.metaDescription}"></div>
+
+    <div th:utext="${post.content}"></div>
+
+
+    Created on: <span th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy')}"></span>
+
+
+
+
+
+</div>
+</body>
+</html>

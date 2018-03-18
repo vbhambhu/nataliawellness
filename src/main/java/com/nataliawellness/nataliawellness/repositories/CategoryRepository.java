@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+    Category findBySlug(String slug);
+
+    //List<Category> findByIdNot(Long id);
+
 }

@@ -24,6 +24,7 @@ public class Post {
 
     private String metaDescription;
 
+    private int viewCount;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -150,5 +151,13 @@ public class Post {
 
     public void setMetaDescription(String metaDescription) {
         this.metaDescription = metaDescription;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 }

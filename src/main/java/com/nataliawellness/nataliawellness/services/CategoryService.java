@@ -28,9 +28,22 @@ public class CategoryService {
         return categoryRepository.getOne(id);
     }
 
-    public List<Category> findAllExceptId(Long id) {
+//    public List<Category> findAllExceptId(Long id) {
+//
+//       return categoryRepository.findAll();
+//
+//    }
 
-       return null;
+    public Category findBySlug(String slug) {
+        return categoryRepository.findBySlug(slug);
+    }
 
+    public void deleteById(Long id) {
+
+        Category category = categoryRepository.getOne(id);
+
+        if(category != null){
+            categoryRepository.deleteById(id);
+        }
     }
 }
