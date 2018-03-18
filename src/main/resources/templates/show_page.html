@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<body>
+<div id="page" layout:fragment="content">
+
+    <h1 th:text="${page.title}"></h1>
+
+
+    <div th:text="${page.metaDescription}"></div>
+
+    <div th:utext="${page.content}"></div>
+
+
+    
+
+</div>
+</body>
+</html>

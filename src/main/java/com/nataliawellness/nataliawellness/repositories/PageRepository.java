@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface PageRepository extends JpaRepository<Page, Long> {
 
 
+    Page findBySlug(String slug);
+
 }

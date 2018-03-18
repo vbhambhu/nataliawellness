@@ -4,6 +4,7 @@ import com.nataliawellness.nataliawellness.entities.Category;
 import com.nataliawellness.nataliawellness.entities.Post;
 import com.nataliawellness.nataliawellness.entities.Setting;
 import com.nataliawellness.nataliawellness.services.CategoryService;
+import com.nataliawellness.nataliawellness.services.PageService;
 import com.nataliawellness.nataliawellness.services.PostService;
 import com.nataliawellness.nataliawellness.services.SettingService;
 import javafx.geometry.Pos;
@@ -25,6 +26,9 @@ public class HomeController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    PageService pageService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -57,8 +61,16 @@ public class HomeController {
         //check for page
 
         //check for post
-        model.addAttribute("post", postService.getBySlug(slug));
-        return "show_post";
+        if(postService.getBySlug(slug) != null){
+            model.addAttribute("post", postService.getBySlug(slug));
+            return "show_post";
+        }
+
+
+
+        model.addAttribute("page", pageService.getBySlug(slug));
+        return "show_page";
+
 
 
     }

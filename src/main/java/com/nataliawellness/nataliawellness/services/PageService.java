@@ -25,4 +25,8 @@ public class PageService {
     public Page getById(Long id) {
         return pageRepository.getOne(id);
     }
+
+    public Page getBySlug(String slug) {
+        return pageRepository.findBySlug(slug);
+    }
 }
