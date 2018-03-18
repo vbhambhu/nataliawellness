@@ -62,9 +62,8 @@ public class PostService {
 
     public Post getById(Long id) {
 
-        //return postRepository.findOne(id);
+        return postRepository.getOne(id);
 
-        return null;
     }
 
     public void update(Post article) {

@@ -103,6 +103,8 @@ public class PostController {
         post.setCreatedAt(articleDb.getCreatedAt());
         post.setAuthor(articleDb.getAuthor());
         postService.update(post);
+
+        redirAttrs.addFlashAttribute("successMsg", "Post updated successfully!");
         return "redirect:/admin/post/list";
 
 
@@ -110,11 +112,11 @@ public class PostController {
 
 
     @RequestMapping(value = "/admin/post/delete", method = RequestMethod.POST)
-    public String saveEditedPost(Post post, RedirectAttributes redirAttrs){
+    public String deletePost(Post post, RedirectAttributes redirAttrs){
 
        postService.delete(post);
 
-        redirAttrs.addFlashAttribute("message", "Post deleted successfully!");
+        redirAttrs.addFlashAttribute("successMsg", "Post deleted successfully!");
         return "redirect:/admin/post/list";
 
     }
