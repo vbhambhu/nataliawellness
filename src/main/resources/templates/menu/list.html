@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div id="page" layout:fragment="content">
+
+
+
+
+
+
+            <h3>All articles</h3>
+
+            <a href="/menu/create">Create</a>
+
+
+            <div class="alert alert-success" role="alert" th:if="${message != null}" th:text="${message}"></div>
+
+
+
+
+            <table class="table datatable table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Parent</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="menu : ${menuList}">
+                    <td><a th:href="@{/article/edit(id=${menu.id})}" th:text="${menu.name}">...</a></td>
+                    <td th:text="${menu.name}"></td>
+                    <td><a th:href="@{/article/edit(id=${menu.id})}" th:text="${menu.name}">...</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

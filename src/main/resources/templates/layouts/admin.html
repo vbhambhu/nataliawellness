@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/admin_header :: head"></head>
+<body>
+<div class="container">
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+            <a class="navbar-brand" href="#">Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin/post/list">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/page/list">Pages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/category/list">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/menu/list">Menu</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/tag/list">Tags</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/user/list">Users</a>
+                    </li>
+
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+    <div layout:fragment="content"></div>
+    <div th:replace="fragments/admin_footer :: footer"></div>
+</div>
+</body>
+</html>

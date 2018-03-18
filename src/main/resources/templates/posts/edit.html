@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div layout:fragment="content">
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Edit Post</h3>
+        </div>
+        <div class="col-md-6">
+            <form th:object="${post}" th:action="@{/admin/post/delete}" method="POST">
+                <input type="hidden" th:field="${post.id}" />
+                <button type="submit" class="btn btn-danger float-right">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <form th:object="${post}" method="POST">
+
+        <div class="row">
+            <div class="col-md-9">
+
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid" th:field="${post.title}" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Slug (Post URL)</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('slug')} ? is-invalid" th:field="${post.slug}" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Error</div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Overview/Meta Description</label>
+                    <textarea class="form-control" th:classappend="${#fields.hasErrors('metaDescription')} ? is-invalid" th:field="${post.metaDescription}" rows="3"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('metaDescription')}" th:errors="*{metaDescription}">Error</div>
+                    <small id="characters" class="form-text text-muted"></small>
+                </div>
+
+
+
+                <div class="form-group">
+                    <textarea class="form-control" th:field="${post.content}" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" th:field="${post.status}">
+                        <option value="0">Draft</option>
+                        <option value="1">Publish</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">Update</button>
+
+                <hr>
+
+
+                <div class="form-group">
+                    <label>Categories</label>
+                    <select multiple class="form-control select2_tags" th:field="${post.categories}">
+                        <option th:each="category : ${cats}"
+                                th:text="${category.name}"
+                                th:value="${category.id}"
+                        >1</option>
+                    </select>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+
+</div>
+</body>
+</html>

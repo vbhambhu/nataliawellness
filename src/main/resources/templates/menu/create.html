@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div id="page" layout:fragment="content">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <h4>Create new</h4>
+                <hr>
+
+                <form th:object="${menu}" method="POST">
+
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name')} ? is-invalid" th:field="${menu.name}" />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control" th:field="${menu.type}">
+                            <option value="1">Article</option>
+                            <option value="2">Page</option>
+                            <option value="3">URL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Article</label>
+                        <select class="form-control select2_article" th:classappend="${#fields.hasErrors('articleId')} ? is-invalid" th:field="${menu.articleId}"></select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('articleId')}" th:errors="*{articleId}">Error</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Page ID</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name')} ? is-invalid" th:field="${menu.name}" />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parent</label>
+                        <select class="form-control" th:field="${menu.parentId}">
+                            <option value="0">None</option>
+                            <option th:each="menu1 : ${menuList}"
+                                    th:text="${menu1.name}"
+                                    th:value="${menu1.id}"
+                            >1</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('position')} ? is-invalid" th:field="${menu.position}" />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Error</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Create</button>
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+</div>
+</body>
+</html>
