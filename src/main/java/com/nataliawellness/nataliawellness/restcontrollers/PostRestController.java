@@ -1,7 +1,10 @@
 package com.nataliawellness.nataliawellness.restcontrollers;
 
 
+import com.nataliawellness.nataliawellness.entities.Menu;
 import com.nataliawellness.nataliawellness.entities.Post;
+import com.nataliawellness.nataliawellness.repositories.MenuRepository;
+import com.nataliawellness.nataliawellness.services.MenuService;
 import com.nataliawellness.nataliawellness.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +21,9 @@ public class PostRestController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    MenuService menuService;
+
     @ResponseBody
     @RequestMapping(value = "create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Post create(@Valid @RequestBody Post post){
@@ -31,5 +37,14 @@ public class PostRestController {
     public List<Post> listPosts(){
         //return postService.findAll();
         return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "menu", method = RequestMethod.GET)
+    public List<Menu> dsadada(){
+
+
+        return menuService.getSiteMenu();
+
     }
 }

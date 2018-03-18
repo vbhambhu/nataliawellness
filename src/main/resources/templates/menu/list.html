@@ -8,15 +8,19 @@
 
 
 
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Menu</h3>
+        </div>
+        <div class="col-md-6">
+            <a href="/admin/menu/create" class="btn btn-primary float-right">Add new</a>
+        </div>
+    </div>
+
+    <hr>
 
 
 
-            <h3>All articles</h3>
-
-            <a href="/menu/create">Create</a>
-
-
-            <div class="alert alert-success" role="alert" th:if="${message != null}" th:text="${message}"></div>
 
 
 
@@ -24,16 +28,18 @@
             <table class="table datatable table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Slug</th>
                     <th>Parent</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="menu : ${menuList}">
-                    <td><a th:href="@{/article/edit(id=${menu.id})}" th:text="${menu.name}">...</a></td>
-                    <td th:text="${menu.name}"></td>
-                    <td><a th:href="@{/article/edit(id=${menu.id})}" th:text="${menu.name}">...</a></td>
+                    <td><a th:href="@{/admin/menu/edit(id=${menu.id})}" th:text="${menu.name}">...</a></td>
+                    <td th:text="${menu.slug}"></td>
+                    <td th:text="${menu.parent?.name}"></td>
+                    <td><a th:href="@{/admin/menu/delete(id=${menu.id})}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

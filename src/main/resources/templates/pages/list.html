@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<body>
+<div id="page" layout:fragment="content">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Pages</h3>
+        </div>
+        <div class="col-md-6">
+            <a href="/admin/page/create" class="btn btn-primary float-right">Add new</a>
+        </div>
+    </div>
+
+    <hr>
+
+
+
+    <table class="table datatable table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Updated At</th>
+            <th>Created At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="page : ${pages}">
+            <td><a th:href="@{/admin/page/edit(id=${page.id})}" th:text="${page.title}">...</a></td>
+
+            <td>
+                <div th:if="${page.status} == true">Published</div>
+                <div th:if="${page.status} == false">Draft</div>
+            </td>
+
+            <td th:text="${#dates.format(page.updatedAt, 'dd-MMM-yyyy HH:mm')}">...</td>
+            <td th:text="${#dates.format(page.createdAt, 'dd-MMM-yyyy HH:mm')}">...</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>
+</body>
+</html>

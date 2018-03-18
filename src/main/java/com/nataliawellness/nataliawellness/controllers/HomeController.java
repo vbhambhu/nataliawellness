@@ -2,8 +2,10 @@ package com.nataliawellness.nataliawellness.controllers;
 
 import com.nataliawellness.nataliawellness.entities.Category;
 import com.nataliawellness.nataliawellness.entities.Post;
+import com.nataliawellness.nataliawellness.entities.Setting;
 import com.nataliawellness.nataliawellness.services.CategoryService;
 import com.nataliawellness.nataliawellness.services.PostService;
+import com.nataliawellness.nataliawellness.services.SettingService;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,20 +26,10 @@ public class HomeController {
     @Autowired
     CategoryService categoryService;
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(Model model) {
-
-        List<Category> categoryList = categoryService.findAll();
-
-        for(Category category : categoryList){
-
-           // Post post = postService.findTopPostByCategory(category);
-
-            //System.out.println(post);
-
-        }
-
-        // model.addAttribute("posts", postService.findAll());
+        model.addAttribute("posts", postService.getHomePagePosts());
         return "home";
 
     }

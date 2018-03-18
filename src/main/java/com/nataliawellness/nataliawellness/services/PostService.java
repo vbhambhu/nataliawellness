@@ -2,6 +2,7 @@ package com.nataliawellness.nataliawellness.services;
 
 import com.nataliawellness.nataliawellness.entities.Category;
 import com.nataliawellness.nataliawellness.entities.Post;
+import com.nataliawellness.nataliawellness.entities.Setting;
 import com.nataliawellness.nataliawellness.entities.User;
 import com.nataliawellness.nataliawellness.helpers.SiteHelper;
 import com.nataliawellness.nataliawellness.repositories.CategoryRepository;
@@ -16,6 +17,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +36,10 @@ public class PostService {
 
     @Value("${upload.path}")
     private String uploadPath;
+
+
+    @Autowired
+    SettingService settingService;
 
 
     public List<Post> getAllPosts() {
@@ -130,5 +136,16 @@ public class PostService {
 
     public void delete(Post post) {
         postRepository.delete(post);
+    }
+
+    public List<Post> getHomePagePosts() {
+
+        List<String> slugList = new ArrayList<String>();
+        List<Setting> settings = settingService.getAllByName("home_page_post");
+        for(Setting setting : settings){
+            slugList.add(setting.getValue());
+        }
+        return postRepository.findBySlugIn(slugList);
+
     }
 }

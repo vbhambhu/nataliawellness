@@ -1,7 +1,8 @@
 package com.nataliawellness.nataliawellness.entities;
 
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,38 +14,38 @@ public class Page {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id;
 
+    @Size(min=2, max=255, message = "Slug field must be between 2 and 255 characters.")
     @Column(unique=true)
-    @NotEmpty
     private String slug;
 
-
-    @Size(min = 5, max = 255)
+    @Size(min=2, max=255, message = "Title field must be between 2 and 255 characters.")
     private String title;
 
-    private String body;
+    private String metaDescription;
 
-    @ManyToOne
-    private User creator;
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
     private boolean status;
 
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
     private Date updatedAt;
 
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     private Date createdAt;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
-//    private Category category;
-
-
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getSlug() {
@@ -63,23 +64,43 @@ public class Page {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getMetaDescription() {
+        return metaDescription;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setMetaDescription(String metaDescription) {
+        this.metaDescription = metaDescription;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public String getContent() {
+        return content;
     }
 
-    //        public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

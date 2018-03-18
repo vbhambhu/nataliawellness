@@ -22,4 +22,7 @@ public class PageService {
         pageRepository.save(page);
     }
 
+    public Page getById(Long id) {
+        return pageRepository.getOne(id);
+    }
 }

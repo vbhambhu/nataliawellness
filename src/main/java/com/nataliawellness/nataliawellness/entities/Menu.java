@@ -1,8 +1,13 @@
 package com.nataliawellness.nataliawellness.entities;
 
-import org.hibernate.validator.constraints.NotEmpty;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -13,10 +18,20 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
+    @Size(min=1, max=255, message = "Slug field must be between 2 and 255 characters.")
+    @Column(unique=true)
+    private String slug;
+
+    @Size(min=2, max=255, message = "Name field must be between 2 and 255 characters.")
     private String name;
 
-    private String path;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Menu parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Menu> children = new ArrayList<Menu>();
 
     private int position;
 
@@ -36,12 +51,12 @@ public class Menu {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public int getPosition() {
@@ -50,5 +65,21 @@ public class Menu {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public Menu getParent() {
+        return parent;
+    }
+
+    public void setParent(Menu parent) {
+        this.parent = parent;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 }
