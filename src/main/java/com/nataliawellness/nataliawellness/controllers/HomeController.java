@@ -45,20 +45,23 @@ public class HomeController {
 
     }
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String aboutPage() {
-        return "special/about";
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String aboutPage(@RequestParam String q) {
+        System.out.println(q);
+        return "special/search";
     }
 
-    @RequestMapping(value = "/blog", method = RequestMethod.GET)
-    public String abloutPage() {
-        return "special/blog";
-    }
+
 
     @RequestMapping(value = "{slug}", method = RequestMethod.GET)
     public String homePage(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
         //check for page
+
+        if(pageService.getBySlug(slug) != null){
+            model.addAttribute("page", pageService.getBySlug(slug));
+            return "show_page";
+        }
 
         //check for post
         if(postService.getBySlug(slug) != null){
@@ -67,11 +70,7 @@ public class HomeController {
         }
 
 
-
-        model.addAttribute("page", pageService.getBySlug(slug));
-        return "show_page";
-
-
+        return "show_404";
 
     }
 
