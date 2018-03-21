@@ -5,8 +5,21 @@
 <body>
 <div layout:fragment="content">
 
-    <h3>New post</h3>
+    <div class="action-block">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>New Page</h4>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/page/list" class="btn btn-dark float-right">Cancel</a>
+            </div>
+        </div>
+    </div>
 
+
+
+
+    <div class="view-block">
     <form th:object="${page}" method="POST">
 
         <div class="row">
@@ -35,7 +48,7 @@
 
 
                 <div class="form-group">
-                    <textarea class="form-control" th:field="${page.content}" rows="5"></textarea>
+                    <textarea class="form-control editor" th:field="${page.content}" rows="5"></textarea>
                 </div>
 
             </div>
@@ -62,7 +75,7 @@
 
 
     </form>
-
+    </div>
 </div>
 </body>
 </html>

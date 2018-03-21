@@ -24,7 +24,10 @@ public class PageController {
     }
 
     @RequestMapping(value = "/admin/page/create", method = RequestMethod.GET)
-    public String createPage(Page page){
+    public String createPage(Model model,Page page){
+
+        String jsFiles[] = {"select2.min.js", "tinymce/tinymce.min.js"};
+        model.addAttribute("jsFiles", jsFiles);
         return "pages/create";
     }
 
@@ -34,6 +37,8 @@ public class PageController {
                               BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
+            String jsFiles[] = {"select2.min.js", "tinymce/tinymce.min.js"};
+            model.addAttribute("jsFiles", jsFiles);
             return "pages/create";
         }
 

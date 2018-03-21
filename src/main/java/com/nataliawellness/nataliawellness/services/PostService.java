@@ -133,8 +133,8 @@ public class PostService {
         return postRepository.findBySlug(slug);
     }
 
-    public void delete(Post post) {
-        postRepository.delete(post);
+    public void delete(Long id) {
+        postRepository.deleteById(id);
     }
 
     public List<Post> getHomePagePosts() {

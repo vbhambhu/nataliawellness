@@ -7,16 +7,18 @@
 <div id="page" layout:fragment="content">
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>All Posts</h3>
-        </div>
-        <div class="col-md-6">
-            <a href="/admin/post/create" class="btn btn-primary float-right">Add new</a>
+    <div class="action-block">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>All Posts</h4>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/post/create" class="btn btn-primary float-right">Add new</a>
+            </div>
         </div>
     </div>
 
-    <hr>
+
 
     <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successMsg}">
         <span th:text="${successMsg}"></span>
@@ -33,6 +35,7 @@
     </div>
 
 
+    <div class="view-block">
 
     <table class="table datatable table-striped table-bordered">
         <thead>
@@ -43,11 +46,12 @@
             <th>Status</th>
             <th>Updated At</th>
             <th>Created At</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="post : ${posts}">
-            <td><a th:href="@{/admin/post/edit(id=${post.id})}" th:text="${post.title}">...</a></td>
+            <td th:text="${post.title}"></td>
             <td><span th:text="${post.author.firstName}"></span> <span th:text="${post.author.lastName}"></span></td>
             <td>
 
@@ -63,11 +67,21 @@
             <td th:text="${#dates.format(post.updatedAt, 'dd-MMM-yyyy HH:mm')}">...</td>
             <td th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy HH:mm')}">...</td>
 
+            <td>
+                <form th:action="@{/admin/post/delete}" method="post" class="delete_form">
+                    <input type="hidden" th:value="${post.id}" name="post_id">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a th:href="@{/admin/post/edit/(id=${post.id})}" class="btn btn-primary">Edit</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>
 
-
+    </div>
 
 
 </div>
