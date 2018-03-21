@@ -26,11 +26,11 @@ public class PageController {
     @RequestMapping(value = "/admin/page/create", method = RequestMethod.GET)
     public String createPage(Model model,Page page){
 
+        //some changes
         String jsFiles[] = {"select2.min.js", "tinymce/tinymce.min.js"};
         model.addAttribute("jsFiles", jsFiles);
         return "pages/create";
     }
-
 
     @RequestMapping(value = "/admin/page/create", method = RequestMethod.POST)
     public String createPages(Model model, @Valid Page page,
