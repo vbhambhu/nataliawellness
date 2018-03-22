@@ -83,7 +83,7 @@ public class MenuController {
 
 
         menuService.create(menu);
-        redirAttrs.addFlashAttribute("successMsg", "New menu has been updated successfully!");
+        redirAttrs.addFlashAttribute("successMsg", "Menu has been updated successfully!");
 
         return "redirect:/admin/menu/list";
     }

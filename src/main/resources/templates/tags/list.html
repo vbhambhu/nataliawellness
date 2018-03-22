@@ -7,15 +7,18 @@
 <div id="page" layout:fragment="content">
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>All Tags</h3>
-        </div>
-        <div class="col-md-6">
-            <a href="/admin/tag/create" class="btn btn-primary float-right">Add new</a>
+
+
+    <div class="action-block">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Tag</h4>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/tag/create" class="btn btn-primary float-right">Add new</a>
+            </div>
         </div>
     </div>
-    <hr>
 
 
 
@@ -34,25 +37,36 @@
     </div>
 
 
+    <div class="view-block">
+
 
     <table class="table datatable table-striped table-bordered">
         <thead>
         <tr>
             <th>Name</th>
             <th>Slug</th>
-            <th>Delete</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="tag : ${tags}">
-            <td><a th:href="@{/admin/tag/edit(id=${tag.id})}" th:text="${tag.name}">...</a></td>
+            <td th:text="${tag.name}"></td>
             <td th:text="${tag.slug}">...</td>
-            <td><a th:href="@{/admin/tag/delete(id=${tag.id})}">Delete</a></td>
+            <td>
+                <form th:action="@{/admin/tag/delete}" method="post" class="delete_form">
+                    <input type="hidden" th:value="${tag.id}" name="page_id">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a th:href="@{/admin/tag/edit/(id=${tag.id})}" class="btn btn-primary">Edit</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>
 
-
+    </div>
 
 
 </div>

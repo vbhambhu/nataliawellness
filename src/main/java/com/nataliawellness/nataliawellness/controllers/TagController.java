@@ -73,7 +73,7 @@ public class TagController {
 
 
         tagService.create(tag);
-        redirAttrs.addFlashAttribute("successMsg", "New tag has been updated successfully!");
+        redirAttrs.addFlashAttribute("successMsg", "Tag has been updated successfully!");
 
         return "redirect:/admin/tag/list";
     }

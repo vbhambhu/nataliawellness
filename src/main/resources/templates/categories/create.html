@@ -5,18 +5,24 @@
 <body>
 <div layout:fragment="content">
 
-    <h3>New category</h3>
+    <div class="action-block">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>New category</h4>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/category/list" class="btn btn-dark float-right">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="view-block">
 
     <form th:object="${category}" method="POST">
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-4">
 
-                <div class="form-group">
-                    <label>Slug</label>
-                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('slug')} ? is-invalid" th:field="${category.slug}" />
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Error</div>
-                </div>
 
                 <div class="form-group">
                     <label>Name</label>
@@ -24,6 +30,11 @@
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
                 </div>
 
+                <div class="form-group">
+                    <label>Slug</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('slug')} ? is-invalid" th:field="${category.slug}" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Error</div>
+                </div>
 
                 <div class="form-group">
                     <label>Parent</label>
@@ -36,34 +47,14 @@
 
                     </select>
                 </div>
-
-            </div>
-            <div class="col-md-3">
-
-
-
-
-
-
                 <button type="submit" class="btn btn-success">Create</button>
-
-
-
             </div>
         </div>
-
-
-
-
-
-
-
-
 
     </form>
 
 
-
+</div>
 
 
 </div>

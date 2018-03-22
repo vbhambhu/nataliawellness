@@ -6,12 +6,25 @@
 <body>
 <div id="page" layout:fragment="content">
 
+
+    <div class="action-block">
         <div class="row">
             <div class="col-md-6">
+                <h4>Edit</h4>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/menu/list" class="btn btn-dark float-right">Cancel</a>
+            </div>
+        </div>
+    </div>
 
-                <h4>Edit </h4>
-                <hr>
 
+
+
+    <div class="view-block">
+
+        <div class="row">
+            <div class="col-md-4">
 
                 <form th:object="${menu}" method="POST">
 
@@ -54,7 +67,7 @@
             </div>
         </div>
 
-
+    </div>
 
 
 
