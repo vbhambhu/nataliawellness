@@ -1,8 +1,10 @@
 package com.nataliawellness.nataliawellness.controllers;
 
+import com.nataliawellness.nataliawellness.entities.Media;
 import com.nataliawellness.nataliawellness.entities.Post;
 import com.nataliawellness.nataliawellness.helpers.SiteHelper;
 import com.nataliawellness.nataliawellness.services.PostService;
+import com.nataliawellness.nataliawellness.services.StorageService;
 import com.nataliawellness.nataliawellness.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -23,6 +26,9 @@ public class PostController {
 
     @Autowired
     TagService tagService;
+
+    @Autowired
+    StorageService storageService;
 
 
     @RequestMapping(value = "/admin/post/list", method = RequestMethod.GET)
@@ -44,7 +50,11 @@ public class PostController {
     }
 
     @RequestMapping(value = "/admin/post/create", method = RequestMethod.POST)
-    public String validateAndSavePost(Model model, @Valid Post post, BindingResult bindingResult){
+    public String validateAndSavePost(Model model, @Valid Post post,
+                                      BindingResult bindingResult
+                                      ){
+
+        System.out.println(bindingResult.getAllErrors());
 
         if(bindingResult.hasErrors()){
             model.addAttribute("cats", postService.getAllCategories());
@@ -94,8 +104,6 @@ public class PostController {
             model.addAttribute("cats", postService.getAllCategories());
             return "posts/edit";
         }
-
-
 
 
         Post articleDb = postService.getById(id);

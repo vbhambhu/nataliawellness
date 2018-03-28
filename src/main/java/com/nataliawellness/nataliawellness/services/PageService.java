@@ -5,6 +5,7 @@ import com.nataliawellness.nataliawellness.repositories.PageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,8 @@ public class PageService {
     }
 
     public void create(Page page) {
+        page.setCreatedAt(new Date());
+        page.setUpdatedAt(new Date());
         pageRepository.save(page);
     }
 

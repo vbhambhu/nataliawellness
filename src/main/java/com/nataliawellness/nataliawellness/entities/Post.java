@@ -33,6 +33,10 @@ public class Post {
     @JoinColumn(name = "author_id")
     private User author;
 
+
+    private String image;
+
+
     private boolean status;
 
 
@@ -159,5 +163,13 @@ public class Post {
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

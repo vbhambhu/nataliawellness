@@ -14,8 +14,6 @@ public class Media {
     @Size(min=2, max=255, message = "Name field must be between 2 and 255 characters.")
     private String name;
 
-    private String path;
-
     public Long getId() {
         return id;
     }
@@ -32,11 +30,4 @@ public class Media {
         this.name = name.toLowerCase().replaceAll(" ", "-");
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

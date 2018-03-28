@@ -42,7 +42,10 @@ $('.datatable').exists(function() {
 
 $('.editor').exists(function() {
     tinymce.init({
-        selector: '.editor'
+        selector: '.editor',
+        plugins: ["image", "link","media","table","textcolor"],
+        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+        image_caption: true
     });
 });
 
@@ -105,3 +108,49 @@ $('.delete_form').submit(function(e) {
         }
     });
 });
+
+
+
+$('#upload_media').click(function(){
+    $('#imgupload').trigger('click');
+});
+
+$('#imgupload').on('change', function(){
+    $("#upload_form").submit();
+});
+
+$('#upload_image').click(function(){
+    $('#img_upload').trigger('click');
+});
+
+$('#img_upload').on('change', function(){
+
+    var file_data = $(this).prop("files")[0];
+    var form_data = new FormData();
+    form_data.append("file", file_data);
+
+
+    $.ajax({
+        type:'POST',
+        url: "/api/upload",
+        data:form_data,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data){
+            $("#image").val(data);
+            $("#upload_preview").attr("src", data);
+           // $("#image").src = reader.result;
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+
+
+});
+
+
+
+
+

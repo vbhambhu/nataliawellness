@@ -28,6 +28,8 @@ public class Page {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    private String image;
+
     private boolean status;
 
     @Column(nullable = false)
@@ -102,5 +104,13 @@ public class Page {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

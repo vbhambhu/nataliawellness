@@ -1,66 +1,18 @@
-<nav id="sidebar" th:fragment="sidebar">
-    <div class="sidebar-header">
-        <h3>Admin Panel</h3>
-        <strong>AP</strong>
-    </div>
+<div id="sidebar" th:fragment="home">
 
-    <ul class="list-unstyled components">
-        <li>
-            <a href="/admin">
-                <i class="glyphicon glyphicon-home"></i>
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="/admin/post/list">
-                <i class="glyphicon glyphicon-briefcase"></i>
-                Posts
-            </a>
-            <a href="/admin/page/list">
-                <i class="glyphicon glyphicon-duplicate"></i>
-                Pages
-            </a>
-        </li>
-        <li>
-            <a href="/admin/category/list">
-                <i class="glyphicon glyphicon-link"></i>
-                Categories
-            </a>
-        </li>
-        <li>
-            <a href="/admin/menu/list">
-                <i class="glyphicon glyphicon-paperclip"></i>
-                Menu
-            </a>
-        </li>
-        <li>
-            <a href="/admin/tag/list">
-                <i class="glyphicon glyphicon-paperclip"></i>
-                Tags
-            </a>
-        </li>
-        <li>
-            <a href="/admin/settings">
-                <i class="glyphicon glyphicon-send"></i>
-                Settings
-            </a>
-        </li>
-
-        <li>
-            <a href="/admin/media/list">
-                <i class="glyphicon glyphicon-send"></i>
-                Media
-            </a>
-        </li>
-
-        <li>
-            <a href="/logout">
-                <i class="glyphicon glyphicon-send"></i>
-                Logout
-            </a>
-        </li>
+    <img class="card-img-top rounded-circle" th:src="${profile_page.image}">
+    <h4 th:text="${profile_page.title}">..</h4>
+    <div th:utext="${profile_page.content}"></div>
+    <hr>
+    <h4>Natalia Wellness</h4>
+    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
+        Subscribe
+    </button>
+    Get the inside scoop.
+    <ul>
+        <li>Wellness</li>
+        <li>Inspiration</li>
+        <li>Free tips</li>
     </ul>
 
-
-
-</nav>
+</div>

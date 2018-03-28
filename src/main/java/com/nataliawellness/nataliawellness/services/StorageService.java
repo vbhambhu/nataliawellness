@@ -1,7 +1,11 @@
 package com.nataliawellness.nataliawellness.services;
 
 
+import com.nataliawellness.nataliawellness.entities.Media;
 import com.nataliawellness.nataliawellness.exceptions.StorageException;
+import com.nataliawellness.nataliawellness.repositories.MediaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,14 +19,24 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class StorageService {
 
-    private String location = "upload-dir";
+    @Value("${app.image.cdn}")
+    private String imageCDN;
+
+    @Value("${app.upload.path}")
+    private String uploadPath;
+
+
+    @Autowired
+    MediaRepository mediaRepository;
 
     private Path rootLocation;
 
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
+
+        String storedLocation;
 
 
-        rootLocation = Paths.get(location);
+        rootLocation = Paths.get(uploadPath);
 
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         filename = filename.toLowerCase().replaceAll(" ", "-");
@@ -39,10 +53,22 @@ public class StorageService {
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(filename),
                     StandardCopyOption.REPLACE_EXISTING);
+
+            //save to db
+            Media media = new Media();
+            media.setName(imageCDN+file.getOriginalFilename());
+            mediaRepository.save(media);
+
+            storedLocation = media.getName();
+
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
+
+
+        return storedLocation;
     }
+
 
 }

@@ -3,105 +3,16 @@
 <head th:replace="fragments/header :: head"></head>
 <body>
 
-
-
-<nav class="navbar navbar-expand-md bg-white mb-4 fixed-top box-shadow">
-
-    <div class="container">
-        <a class="navbar-brand" href="/">Nataliawellness</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                <div th:each="menu : ${menuItems}">
-                    <li class="nav-item" th:if="${menu.children.empty}">
-                        <a class="nav-link" th:text="${menu.name}" th:href="${menu.slug}">link</a>
-                    </li>
-                    <li class="nav-item dropdown" th:if="${!menu.children.empty}">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="${menu.slug}" role="button" aria-haspopup="true" aria-expanded="false" th:text="${menu.name}">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" th:each="childMenuItem : ${menu.children}" th:href="${childMenuItem.slug}" th:text="${childMenuItem.name}"></a>
-                        </div>
-                    </li>
-                </div>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#search"><i class="fas fa-search"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-<div id="search">
-    <button type="button" class="close">×</button>
-    <form action="/search">
-        <input type="search" value="" placeholder="type keyword(s) here" name="q" />
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="fragments/menu :: menu"></div>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-9" layout:fragment="content"></div>
         <div class="col-md-3">
-
-
-
-            <img class="card-img-top rounded-circle" data-src="holder.js/100px250?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-
-
-            <h4>Natalia</h4>
-            <div>
-                Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
-            </div>
-
-            <hr>
-
-            <h4>Natalia Wellness</h4>
-
-
-            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
-                Subscribe
-            </button>
-
-
-
-
-                Get the inside scoop.
-
-            <ul>
-                <li>Wellness</li>
-                <li>Inspiration</li>
-                <li>Free tips</li>
-            </ul>
-
-
-
-
+            <th:block th:if="${sidebar == 'home'}">
+            <div th:replace="fragments/sidebar :: home"></div>
+            </th:block>
         </div>
     </div>
 

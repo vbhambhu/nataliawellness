@@ -13,9 +13,9 @@
             </div>
             <div class="col-md-6">
 
-                <form enctype="multipart/form-data" th:object="${tag}" method="POST" th:action="${'/admin/media/upload'}">
+                <form id="upload_form" enctype="multipart/form-data" th:object="${media}" method="POST" th:action="${'/admin/media/upload'}">
                     <input type="file" name="file" id="imgupload" style="display: none;" />
-                    <button type="submit" class="btn btn-primary float-right">Upload</button>
+                    <button type="button" class="btn btn-primary float-right" id="upload_media">Upload</button>
                 </form>
             </div>
         </div>
@@ -40,20 +40,19 @@
         <table class="table datatable table-striped table-bordered">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Slug</th>
+                <th>Location</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="media : ${mediaList}">
-                <td th:text="${media.name}"></td>
-                <td th:text="${media.path}">...</td>
+                <td>
+                    <a th:href="${media.name}" th:text="${media.name}" target="_blank"></a>
+                </td>
                 <td>
                     <form th:action="@{/admin/media/delete}" method="post" class="delete_form">
                         <input type="hidden" th:value="${media.id}" name="media_id">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <a th:href="@{/admin/media/edit/(id=${media.id})}" class="btn btn-primary">Edit</a>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </div>
                     </form>

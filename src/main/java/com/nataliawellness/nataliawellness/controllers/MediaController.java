@@ -40,16 +40,19 @@ public class MediaController {
                                    RedirectAttributes redirectAttributes) {
 
         storageService.store(file);
-
-        Media media = new Media();
-        media.setName(file.getOriginalFilename());
-        media.setPath("ddd");
-
-        mediaRepository.save(media);
-
         redirectAttributes.addFlashAttribute("successMsg", "You successfully uploaded " + file.getOriginalFilename() + "!");
-
         return "redirect:/admin/media/list";
+    }
+
+    @RequestMapping(value = "/admin/media/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam(name = "media_id") Long id,
+                         RedirectAttributes redirectAttributes) {
+
+        mediaRepository.deleteById(id);
+
+        redirectAttributes.addFlashAttribute("successMsg", "Media deleted successfully!");
+        return "redirect:/admin/media/list";
+
     }
 
 
