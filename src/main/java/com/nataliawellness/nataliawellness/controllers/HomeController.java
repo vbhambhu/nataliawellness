@@ -30,8 +30,6 @@ public class HomeController {
         model.addAttribute("posts", postService.getHomePagePosts());
         model.addAttribute("profile_page", pageService.getBySlug("profile"));
         model.addAttribute("sidebar", "home");
-
-
         return "special/home";
 
     }

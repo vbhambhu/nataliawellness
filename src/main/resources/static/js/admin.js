@@ -152,5 +152,7 @@ $('#img_upload').on('change', function(){
 
 
 
-
+$('#showOnHome1').on('change', function(){
+    $(".post-pos").toggleClass("d-none");
+});
 

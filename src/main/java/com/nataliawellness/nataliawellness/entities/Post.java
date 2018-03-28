@@ -26,6 +26,12 @@ public class Post {
 
     private int viewCount;
 
+
+    private boolean showOnHome;
+
+
+    private int positionOnHome;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 
@@ -171,5 +177,21 @@ public class Post {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isShowOnHome() {
+        return showOnHome;
+    }
+
+    public void setShowOnHome(boolean showOnHome) {
+        this.showOnHome = showOnHome;
+    }
+
+    public int getPositionOnHome() {
+        return positionOnHome;
+    }
+
+    public void setPositionOnHome(int positionOnHome) {
+        this.positionOnHome = positionOnHome;
     }
 }

@@ -38,10 +38,6 @@ public class PostService {
     private String uploadPath;
 
 
-    @Autowired
-    SettingService settingService;
-
-
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
@@ -53,10 +49,11 @@ public class PostService {
     public void create(Post post) {
 
         User user = userRepository.findByUsername("admin");
-
         post.setCreatedAt(new Date());
         post.setUpdatedAt(new Date());
         post.setAuthor(user);
+
+
         postRepository.save(post);
     }
 
@@ -139,12 +136,15 @@ public class PostService {
 
     public List<Post> getHomePagePosts() {
 
-        List<String> slugList = new ArrayList<String>();
-        List<Setting> settings = settingService.getAllByName("home_page_post");
-        for(Setting setting : settings){
-            slugList.add(setting.getValue());
-        }
-        return postRepository.findBySlugIn(slugList);
+
+        return postRepository.findByShowOnHomeEqualsAndStatus(true , true);
+
+//        List<String> slugList = new ArrayList<String>();
+//        List<Setting> settings = settingService.getAllByName("home_page_post");
+//        for(Setting setting : settings){
+//            slugList.add(setting.getValue());
+//        }
+       // return postRepository.findBySlugIn(slugList);
 
     }
 }

@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-6" th:each="post : ${posts}">
 
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+
             <!--<div th:text="${post.category.?name}">LIFE STYLE</div>-->
             <h2><a th:href="@{'/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
 

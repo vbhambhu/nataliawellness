@@ -16,5 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findBySlugIn(List<String> slugList);
 
+    List<Post> findByShowOnHomeEqualsAndStatus(boolean onHome, boolean status);
+
 
 }

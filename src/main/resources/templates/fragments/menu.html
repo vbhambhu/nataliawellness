@@ -1,31 +1,32 @@
 <div th:fragment="menu">
-<nav class="navbar navbar-expand-md bg-white mb-4 fixed-top box-shadow">
-    <div class="container">
-        <a class="navbar-brand" href="/">Nataliawellness</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                <div th:each="menu : ${menuItems}">
-                    <li class="nav-item" th:if="${menu.children.empty}">
-                        <a class="nav-link" th:text="${menu.name}" th:href="${menu.slug}">link</a>
-                    </li>
-                    <li class="nav-item dropdown" th:if="${!menu.children.empty}">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="${menu.slug}" role="button" aria-haspopup="true" aria-expanded="false" th:text="${menu.name}">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" th:each="childMenuItem : ${menu.children}" th:href="${childMenuItem.slug}" th:text="${childMenuItem.name}"></a>
-                        </div>
-                    </li>
-                </div>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#search"><i class="fas fa-search"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light top-nav">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand py-3" href="#"><img src="image/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <div th:each="menu : ${menuItems}">
+                        <li class="nav-item" th:if="${menu.children.empty}">
+                            <a class="nav-link" th:text="${menu.name}" th:href="${menu.slug}">link</a>
+                        </li>
+                        <li class="nav-item dropdown" th:if="${!menu.children.empty}">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="${menu.slug}" role="button" aria-haspopup="true" aria-expanded="false" th:text="${menu.name}">Dropdown</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" th:each="childMenuItem : ${menu.children}" th:href="${childMenuItem.slug}" th:text="${childMenuItem.name}"></a>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <i class="fas fa-heart pl-4"></i>
+                    <i class="fas fa-search pl-4"></i>
+                </form>
+            </div>
+        </div>
+    </nav>
 
 <div id="search">
     <button type="button" class="close">×</button>
