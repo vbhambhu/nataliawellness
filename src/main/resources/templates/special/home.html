@@ -8,7 +8,7 @@
             <div class="post-img-wrapper" th:if="${post.image}">
                 <img class="img-fluid" th:src="${post.image}">
             </div>
-            <div class="post-cat-wrapper" th:if="${!post.categories.empty}"  th:text="${post.categories[0].?name}">HEALTH</div>
+            <div class="post-cat-wrapper" th:if="${!post.categories.empty}"  th:text="${post.categories[0].name}">HEALTH</div>
             <h2 class="post-title-wrapper"><a th:href="@{'/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
         </div>
     </div>
