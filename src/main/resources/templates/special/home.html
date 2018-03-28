@@ -2,19 +2,16 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/default">
 <body>
-<div id="page" layout:fragment="content">
-
-
+<div layout:fragment="content">
     <div class="row">
         <div class="col-md-6" th:each="post : ${posts}">
-
-
-            <!--<div th:text="${post.category.?name}">LIFE STYLE</div>-->
-            <h2><a th:href="@{'/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
-
+            <div class="post-img-wrapper" th:if="${post.image}">
+                <img class="img-fluid" th:src="${post.image}">
+            </div>
+            <div class="post-cat-wrapper" th:if="${!post.categories.empty}"  th:text="${post.categories[0].?name}">HEALTH</div>
+            <h2 class="post-title-wrapper"><a th:href="@{'/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
         </div>
     </div>
-
 </div>
 </body>
 </html>
