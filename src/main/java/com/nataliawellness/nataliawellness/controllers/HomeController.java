@@ -1,6 +1,8 @@
 package com.nataliawellness.nataliawellness.controllers;
 
 import com.nataliawellness.nataliawellness.entities.Category;
+import com.nataliawellness.nataliawellness.entities.Page;
+import com.nataliawellness.nataliawellness.entities.Post;
 import com.nataliawellness.nataliawellness.services.CategoryService;
 import com.nataliawellness.nataliawellness.services.PageService;
 import com.nataliawellness.nataliawellness.services.PostService;
@@ -71,19 +73,25 @@ public class HomeController {
 
 
         //check for page
-
-        if(pageService.getBySlug(slug) != null){
-            model.addAttribute("page", pageService.getBySlug(slug));
+        Page page = pageService.getBySlug(slug);
+        if(page != null){
+            model.addAttribute("metaTitle", page.getTitle());
+            model.addAttribute("metaDescription", page.getMetaDescription());
+            model.addAttribute("page", page);
             return "show_page";
         }
 
         //check for post
-        if(postService.getBySlug(slug) != null){
-            model.addAttribute("post", postService.getBySlug(slug));
+        Post post = postService.getBySlug(slug);
+        if(post != null){
+            model.addAttribute("post", post);
+            model.addAttribute("metaTitle", post.getTitle());
+            model.addAttribute("metaDescription", post.getMetaDescription());
             return "show_post";
         }
 
 
+        model.addAttribute("page404", true);
         return "show_404";
 
     }
