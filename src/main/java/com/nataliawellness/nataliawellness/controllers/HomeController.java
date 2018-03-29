@@ -84,7 +84,7 @@ public class HomeController {
             model.addAttribute("category", category);
 
             if(category.getParent() == null){
-                
+
 
                 return "special/parent_category";
             }
