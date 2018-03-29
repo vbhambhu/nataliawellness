@@ -10,9 +10,9 @@
     <div class="row">
         <div class="col-md-9" layout:fragment="content"></div>
         <div class="col-md-3">
-            <th:block th:if="${sidebar == 'home'}">
+            <!--<th:block th:if="${nosidebar}">-->
             <div th:replace="fragments/sidebar :: home"></div>
-            </th:block>
+            <!--</th:block>-->
         </div>
     </div>
 

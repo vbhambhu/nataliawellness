@@ -30,8 +30,6 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(Model model) {
         model.addAttribute("posts", postService.getHomePagePosts());
-        model.addAttribute("profile_page", pageService.getBySlug("profile"));
-        model.addAttribute("sidebar", "home");
         return "special/home";
 
     }
@@ -51,35 +49,8 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
-    public String homePage(Model model, @PathVariable(name = "slug", required = false) String slug) {
-
-        //category
-        if(categoryService.findBySlug(slug) != null){
-
-            Category category = categoryService.findBySlug(slug);
-            model.addAttribute("category", category);
-
-            if(category.getParent() == null){
-                System.out.println("child category");
-                return "special/parent_category";
-            }
-
-            //otherwise single category
-            System.out.println("parent category");
-            return "special/child_category";
-
-        }
-
-
-        //check for page
-        Page page = pageService.getBySlug(slug);
-        if(page != null){
-            model.addAttribute("metaTitle", page.getTitle());
-            model.addAttribute("metaDescription", page.getMetaDescription());
-            model.addAttribute("page", page);
-            return "show_page";
-        }
+    @RequestMapping(value = "/blog/{slug}", method = RequestMethod.GET)
+    public String blogPost(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
         //check for post
         Post post = postService.getBySlug(slug);
@@ -87,12 +58,61 @@ public class HomeController {
             model.addAttribute("post", post);
             model.addAttribute("metaTitle", post.getTitle());
             model.addAttribute("metaDescription", post.getMetaDescription());
-            return "show_post";
+            return "special/blog";
         }
 
 
         model.addAttribute("page404", true);
         return "show_404";
+
+    }
+
+
+
+    @RequestMapping(value = "/category/{slug}", method = RequestMethod.GET)
+    public String dasdda(Model model, @PathVariable(name = "slug", required = false) String slug) {
+
+
+        return "dd";
+//        //category
+//        if(categoryService.findBySlug(slug) != null){
+//
+//            Category category = categoryService.findBySlug(slug);
+//            model.addAttribute("category", category);
+//
+//            if(category.getParent() == null){
+//                System.out.println("child category");
+//                return "special/parent_category";
+//            }
+//
+//            //otherwise single category
+//            System.out.println("parent category");
+//            return "special/child_category";
+//
+//        }
+//
+//
+//        //check for page
+//        Page page = pageService.getBySlug(slug);
+//        if(page != null){
+//            model.addAttribute("metaTitle", page.getTitle());
+//            model.addAttribute("metaDescription", page.getMetaDescription());
+//            model.addAttribute("page", page);
+//            return "show_page";
+//        }
+//
+//        //check for post
+//        Post post = postService.getBySlug(slug);
+//        if(post != null){
+//            model.addAttribute("post", post);
+//            model.addAttribute("metaTitle", post.getTitle());
+//            model.addAttribute("metaDescription", post.getMetaDescription());
+//            return "show_post";
+//        }
+//
+//
+//        model.addAttribute("page404", true);
+//        return "show_404";
 
     }
 

@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-md-6" th:each="post : ${posts}">
             <div class="post-img-wrapper" th:if="${post.image}">
-                <a th:href="@{'/'} + ${post.slug}" class="im">
+                <a th:href="@{'/blog/'} + ${post.slug}" class="im">
                     <img class="img-fluid post-img" th:src="${post.image}">
                 </a>
             </div>
             <div class="post-cat-wrapper" th:if="${!post.categories.empty}"  th:text="${post.categories[0].name}">HEALTH</div>
-            <h2 class="post-title-wrapper"><a th:href="@{'/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
+            <h2 class="post-title-wrapper"><a th:href="@{'/blog/'} + ${post.slug}" th:text="${post.title}">title</a></h2>
         </div>
     </div>
 </div>

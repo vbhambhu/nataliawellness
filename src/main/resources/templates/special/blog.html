@@ -4,10 +4,20 @@
 <body>
 <div id="page" layout:fragment="content">
 
+    <h1 th:text="${post.title}"></h1>
 
-   <h2>Blog</h2>
+    <div th:block="${post.image}">
+        <img class="image-fluid" th:src="${post.image}">
+    </div>
 
-    <p>About page content here</p>
+    <div th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy')}"></div>
+
+
+
+    <div th:utext="${post.content}"></div>
+
+
+    <div id="disqus_thread"></div>
 
 
 
