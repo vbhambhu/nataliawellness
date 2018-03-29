@@ -61,10 +61,25 @@ public class HomeController {
             return "special/blog";
         }
 
+        model.addAttribute("page404", true);
+        return "show_404";
+    }
+
+
+
+    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
+    public String page(Model model, @PathVariable(name = "slug", required = false) String slug) {
+
+        Page page = pageService.getBySlug(slug);
+        if(page != null){
+            model.addAttribute("metaTitle", page.getTitle());
+            model.addAttribute("metaDescription", page.getMetaDescription());
+            model.addAttribute("page", page);
+            return "special/page";
+        }
 
         model.addAttribute("page404", true);
         return "show_404";
-
     }
 
 
