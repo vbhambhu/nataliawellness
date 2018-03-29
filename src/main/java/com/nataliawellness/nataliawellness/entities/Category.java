@@ -21,6 +21,12 @@ public class Category {
     @Size(min=2, max=255, message = "Name field must be between 2 and 255 characters.")
     private String name;
 
+
+    @Size(min=2, max=255, message = "Description field must be between 2 and 255 characters.")
+    private String description;
+
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
@@ -66,5 +72,21 @@ public class Category {
 
     public void setChildren(List<Category> children) {
         this.children = children;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

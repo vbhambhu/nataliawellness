@@ -47,6 +47,28 @@
 
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" th:classappend="${#fields.hasErrors('description')} ? is-invalid" th:field="${category.description}" rows="3"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+                    <small id="characters" class="form-text text-muted"></small>
+                </div>
+
+
+                <div class="form-group d-none">
+                    <label>Image</label>
+                    <input type="text" class="form-control" th:field="${category.image}" />
+                </div>
+
+
+                <div class="form-group">
+                    <input type="file" name="file" id="img_upload" class="d-none" />
+                    <button type="button" class="btn btn-primary" id="upload_image">Upload image</button>
+                </div>
+                <img th:src="${category.image}" class="img-fluid" id="upload_preview"/>
+
+
                 <button type="submit" class="btn btn-success">Create</button>
             </div>
         </div>
