@@ -147,4 +147,14 @@ public class PostService {
        // return postRepository.findBySlugIn(slugList);
 
     }
+
+    public List<Post> getTopBlogInCategory(int i, Category category) {
+
+        //get posts in category
+        //status = enable
+        //limit by number
+        //order by createdat
+
+        return postRepository.findAllByCategoriesContains(category);
+    }
 }

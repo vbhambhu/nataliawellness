@@ -65,9 +65,53 @@ public class HomeController {
         return "show_404";
     }
 
+    @RequestMapping(value = "/category/{slug}", method = RequestMethod.GET)
+    public String categoryChild(Model model, @PathVariable(name = "slug", required = false) String slug) {
+
+//        Category category = categoryService.findBySlug(slug);
+//
+//        if(category != null){
+//            model.addAttribute("category", category);
+//            model.addAttribute("posts", postService.getTopBlogInCategory(10, category));
+//            return "special/child_category";
+//        }
 
 
-    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
+        Category category = categoryService.findBySlug(slug);
+
+        if(category != null){
+
+            model.addAttribute("category", category);
+
+            if(category.getParent() == null){
+                
+
+                return "special/parent_category";
+            }
+
+            //otherwise single category
+            model.addAttribute("posts", postService.getTopBlogInCategory(10, category));
+            return "special/child_category";
+
+        }
+
+        model.addAttribute("page404", true);
+        return "show_404";
+
+
+    }
+
+    @RequestMapping(value = "/category/{parent_slug}/{child_slug}", method = RequestMethod.GET)
+    public String categoryParent(Model model, @PathVariable(name = "parent_slug", required = false) String parent_slug,
+                                @PathVariable(name = "child_slug", required = false) String child_slug) {
+
+
+        return "ddsasdadad";
+    }
+
+
+
+        @RequestMapping(value = "{slug}", method = RequestMethod.GET)
     public String page(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
         Page page = pageService.getBySlug(slug);
@@ -80,55 +124,6 @@ public class HomeController {
 
         model.addAttribute("page404", true);
         return "show_404";
-    }
-
-
-
-    @RequestMapping(value = "/category/{slug}", method = RequestMethod.GET)
-    public String dasdda(Model model, @PathVariable(name = "slug", required = false) String slug) {
-
-
-        return "dd";
-//        //category
-//        if(categoryService.findBySlug(slug) != null){
-//
-//            Category category = categoryService.findBySlug(slug);
-//            model.addAttribute("category", category);
-//
-//            if(category.getParent() == null){
-//                System.out.println("child category");
-//                return "special/parent_category";
-//            }
-//
-//            //otherwise single category
-//            System.out.println("parent category");
-//            return "special/child_category";
-//
-//        }
-//
-//
-//        //check for page
-//        Page page = pageService.getBySlug(slug);
-//        if(page != null){
-//            model.addAttribute("metaTitle", page.getTitle());
-//            model.addAttribute("metaDescription", page.getMetaDescription());
-//            model.addAttribute("page", page);
-//            return "show_page";
-//        }
-//
-//        //check for post
-//        Post post = postService.getBySlug(slug);
-//        if(post != null){
-//            model.addAttribute("post", post);
-//            model.addAttribute("metaTitle", post.getTitle());
-//            model.addAttribute("metaDescription", post.getMetaDescription());
-//            return "show_post";
-//        }
-//
-//
-//        model.addAttribute("page404", true);
-//        return "show_404";
-
     }
 
 }
