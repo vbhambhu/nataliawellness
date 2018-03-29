@@ -22,6 +22,8 @@ public class Post {
     @Size(min=2, max=255, message = "Title field must be between 2 and 255 characters.")
     private String title;
 
+    @Column(columnDefinition = "TEXT")
+    @Size(min=50, max=160, message = "Title field must be between 50 and 160 characters.")
     private String metaDescription;
 
     private int viewCount;

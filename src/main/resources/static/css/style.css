@@ -35,6 +35,9 @@ body{
     color: #de9b7c;
 }
 
+.profile-img{
+    border: 5px solid #c28970;
+}
 
 /* Link */
 .navbar-light .navbar-nav .nav-link {
