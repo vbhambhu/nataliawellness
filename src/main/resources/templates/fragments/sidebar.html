@@ -4,20 +4,36 @@
         <img class="card-img-top rounded-circle profile-img" th:src="${profile_page.image}">
     </div>
 
+    <div class="text-center">
+        <div class="fost">Welcome to</div>
+        <h2 class="frwd">Natalia Wellness</h2>
+        <div th:utext="${profile_page.metaDescription}"></div>
+    </div>
 
 
-    <h4 th:text="${profile_page.title}">..</h4>
-    <div th:utext="${profile_page.content}"></div>
-    <hr>
-    <h4>Natalia Wellness</h4>
-    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
-        Subscribe
-    </button>
-    Get the inside scoop.
-    <ul>
-        <li>Wellness</li>
-        <li>Inspiration</li>
-        <li>Free tips</li>
-    </ul>
+    <div class="text-center subscribe-box">
+
+    <h4 class="fost">Subscribe</h4>
+
+        <div class="fost">to get the</div>
+        <div  class="fost">inside scoop</div>
+
+
+        <div class="fsc fs-16">
+            Wellness <br>
+            Inspiration <br>
+            Free tips
+        </div>
+
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Your email" >
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Subscribe</button>
+            </div>
+        </div>
+
+    </div>
+
 
 </div>

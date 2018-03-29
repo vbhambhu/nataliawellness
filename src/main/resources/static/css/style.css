@@ -1,11 +1,15 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Old+Standard+TT:400,700');
+@import url('https://fonts.googleapis.com/css?family=Damion');
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
 
 body{
     padding-top: 100px;
     background-color: #fde9e4;
+    color: #1a3151;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .top-nav{
@@ -29,6 +33,24 @@ body{
     padding-bottom: 20px;
 }
 
+.fost{
+    font-family: 'Old Standard TT', serif;
+}
+
+.frwd{
+    font-family: 'Damion', cursive;
+}
+
+
+.fsc{
+    font-family: 'Sacramento', cursive;
+}
+
+.fs-16{
+    font-size: 36px;
+    font-weight: bold;
+}
+
 
 .nav-link{
     font-family: 'Quicksand', sans-serif;
@@ -38,6 +60,13 @@ body{
 
 .profile-img{
     border: 5px solid #c28970;
+    margin-bottom: 20px;
+}
+
+.subscribe-box{
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid #1a3151;
 }
 
 /* Link */
