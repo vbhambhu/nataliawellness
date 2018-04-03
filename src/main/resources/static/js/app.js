@@ -33,3 +33,4 @@ $('.navbar .dropdown > a').click(function(){
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
 })();
+

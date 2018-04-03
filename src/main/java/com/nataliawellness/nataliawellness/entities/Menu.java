@@ -19,7 +19,6 @@ public class Menu {
     private Long id;
 
     @Size(min=1, max=255, message = "Slug field must be between 2 and 255 characters.")
-    @Column(unique=true)
     private String slug;
 
     @Size(min=2, max=255, message = "Name field must be between 2 and 255 characters.")

@@ -41,4 +41,9 @@ public class MenuService {
             menuRepository.deleteById(id);
         }
     }
+
+
+    public Menu findBySlug(String slug) {
+        return menuRepository.findBySlug(slug);
+    }
 }

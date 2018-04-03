@@ -156,3 +156,118 @@ $('#showOnHome1').on('change', function(){
     $(".post-pos").toggleClass("d-none");
 });
 
+
+
+$('ul.sortable').exists(function() {
+
+    $('ul.sortable').sortable({
+        connectWith: 'ul.sortable',
+        placeholder: 'sortable-placeholder',
+        update: function(event, ui) {
+
+            if(ui.sender){
+                var pid =  $(this).parent().data("menu-id");
+
+                if( typeof pid === 'undefined' || pid === null ){
+                    $(this).find( ".pid" ).text("null")
+                    $(this).find( "li.menu_item" ).data('parent_id', 0);
+                } else{
+
+                    $(this).find( "li.menu_item" ).data('parent_id', pid);
+                    $(this).find( "li.menu_item" ).css('color', 'red');
+                    $(this).find( ".pid" ).text(pid)
+
+                }
+
+            }
+
+            var menuData = [];
+            $('.menu_item').each(function(i) {
+                var mid = $(this).data('menu-id');
+                var pos = i + 1;
+                var pid = $(this).data("parent_id");
+
+                var dd = {id: mid,name:"dd",slug:"33"}
+                menuData.push(dd)
+
+                //console.log("Menu id = " +mid + ", Menu Pos =" + pos+ ", Parent id =" + pid);
+
+            });
+
+
+            console.log(menuData)
+
+
+
+            $.post( "/api/menu/update", {name:"dd",slug:"dsas"} , function( data ) {
+                //location.reload();
+            });
+
+
+
+
+
+        }
+    }).disableSelection();
+
+
+/*
+
+    $('ul.parent_menu').sortable({
+        // handle: '.mov_handle',
+        connectWith: 'ul.parent_menu',
+        placeholder: 'placeholder',
+        update: function(event, ui) {
+
+
+            //console.log(ui.sender);
+
+
+            if(ui.sender){
+               // alert(ui.item.attr("nodeName") + "  in block = " );
+            }
+
+
+            $('.menu_item').each(function(i) {
+
+                //console.log($(this).parent())
+
+                var mid = $(this).data('menu-id');
+                var pos = i + 1;
+                var pid = $(this).parent().data("menu-id");
+
+                //console.log($(this).parent())
+                console.log("Menu id = " +mid + ", Menu Pos =" + pos+ ", Parent id =" + pid);
+
+
+
+                // // updates the data object
+
+
+            });
+
+        }
+    });
+
+
+*/
+
+    // $('ul.child_menu').sortable({
+    //     // handle: '.mov_handle',
+    //     connectWith: 'ul.parent_menu',
+    //     placeholder: 'placeholder'
+    //     // dropOnEmpty: 1
+    // });
+
+
+
+});
+
+
+$('.menu_delete').click(function(){
+    var id = $(this).data('menu-id');
+    $.post( "/api/menu/delete",{ menu_id: id} , function( data ) {
+        location.reload();
+    });
+});
+

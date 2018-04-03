@@ -2,7 +2,10 @@ package com.nataliawellness.nataliawellness.controllers;
 
 import com.nataliawellness.nataliawellness.entities.Category;
 import com.nataliawellness.nataliawellness.entities.Menu;
+import com.nataliawellness.nataliawellness.services.CategoryService;
 import com.nataliawellness.nataliawellness.services.MenuService;
+import com.nataliawellness.nataliawellness.services.PageService;
+import com.nataliawellness.nataliawellness.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +23,55 @@ public class MenuController {
     @Autowired
     MenuService menuService;
 
-    @RequestMapping(value = "/admin/menu/list", method = RequestMethod.GET)
-    public String listMenu(Model model){
+    @Autowired
+    PostService postService;
 
-        model.addAttribute("menuList",  menuService.findAll());
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    PageService pageService;
+
+    @RequestMapping(value = "/admin/menu/list", method = RequestMethod.GET)
+    public String listMenu(Model model, Menu menu){
+
+        setModelAttrs(model);
         return "menu/list";
     }
 
 
-    @RequestMapping(value = "/admin/menu/create", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/admin/menu/create", method = RequestMethod.POST)
+    public String addPage(Model model, @Valid Menu menu, BindingResult bindingResult,
+                          @RequestParam("type") String type){
+
+        if(bindingResult.hasErrors()) {
+            setModelAttrs(model);
+            return "menu/list";
+        }
+
+        menu.setSlug(type+"/"+menu.getSlug());
+        menuService.create(menu);
+
+        return "redirect:/admin/menu/list";
+
+    }
+
+    private Model setModelAttrs(Model model){
+
+        model.addAttribute("menuList",  menuService.getSiteMenu());
+        String[] jsFiles = {"select2.min.js","jquery-ui.min.js"};
+        model.addAttribute("jsFiles", jsFiles);
+
+        model.addAttribute("posts",  postService.getAllPosts());
+        model.addAttribute("pages",  pageService.findAll());
+        model.addAttribute("categories",  categoryService.findAll());
+        return model;
+    }
+
+
+
+        @RequestMapping(value = "/admin/menu/createss", method = RequestMethod.GET)
     public String createMenu(Model model, Menu menu){
 
         model.addAttribute("menuList",  menuService.findAll());
@@ -39,7 +82,7 @@ public class MenuController {
 
     }
 
-    @RequestMapping(value = "/admin/menu/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/menu/createss", method = RequestMethod.POST)
     public String saveMenu( Model model, @Valid Menu menu, BindingResult bindingResult){
 
 
