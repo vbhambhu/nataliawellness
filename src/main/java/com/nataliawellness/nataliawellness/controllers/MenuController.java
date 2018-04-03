@@ -50,11 +50,14 @@ public class MenuController {
             return "menu/list";
         }
 
-        menu.setSlug(type+"/"+menu.getSlug());
+        if(type.equals("cat")){
+            menu.setSlug("/cat/"+menu.getSlug());
+        } else{
+            menu.setSlug("/"+menu.getSlug());
+        }
+
         menuService.create(menu);
-
         return "redirect:/admin/menu/list";
-
     }
 
     private Model setModelAttrs(Model model){
@@ -67,68 +70,6 @@ public class MenuController {
         model.addAttribute("pages",  pageService.findAll());
         model.addAttribute("categories",  categoryService.findAll());
         return model;
-    }
-
-
-
-        @RequestMapping(value = "/admin/menu/createss", method = RequestMethod.GET)
-    public String createMenu(Model model, Menu menu){
-
-        model.addAttribute("menuList",  menuService.findAll());
-        String jsFiles[] = {"select2.min.js"};
-        model.addAttribute("jsFiles", jsFiles);
-
-        return "menu/create";
-
-    }
-
-    @RequestMapping(value = "/admin/menu/createss", method = RequestMethod.POST)
-    public String saveMenu( Model model, @Valid Menu menu, BindingResult bindingResult){
-
-
-//        if(menu.getType() == 1 && menu.getArticleId() == null){
-//            bindingResult.rejectValue("articleId", "menu.articleId", "Invalid article selected.");
-//        }
-
-
-        if(bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
-            model.addAttribute("menuList",  menuService.findAll());
-            String jsFiles[] = {"select2.min.js"};
-            model.addAttribute("jsFiles", jsFiles);
-            return "menu/create";
-        }
-
-        menuService.create(menu);
-        return "redirect:/admin/menu/list";
-
-    }
-
-    @RequestMapping(value = "/admin/menu/edit", method = RequestMethod.GET)
-    public String editMenu(@RequestParam Long id, Model model){
-
-        Menu menu = menuService.getById(id);
-        model.addAttribute("menu", menu);
-        model.addAttribute("menuList",  menuService.findAll());
-        return "menu/edit";
-    }
-
-    @RequestMapping(value = "/admin/menu/edit", method = RequestMethod.POST)
-    public String saveEditedPost(@RequestParam Long id,
-                                 Model model,
-                                 @Valid Menu menu, BindingResult bindingResult,
-                                 RedirectAttributes redirAttrs){
-
-        if(bindingResult.hasErrors()){
-            model.addAttribute("menuList",  menuService.findAll());
-            return "menu/edit";
-        }
-
-
-        menuService.create(menu);
-        redirAttrs.addFlashAttribute("successMsg", "Menu has been updated successfully!");
-
-        return "redirect:/admin/menu/list";
     }
 
 

@@ -31,12 +31,10 @@ public class HomeController {
     public String homePage(Model model) {
         model.addAttribute("posts", postService.getHomePagePosts());
         return "special/home";
-
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contactPage() {
-
         return "special/contact";
 
     }
@@ -45,6 +43,11 @@ public class HomeController {
     public String aboutPage(@RequestParam String q) {
         System.out.println(q);
         return "special/search";
+    }
+
+    @RequestMapping(value = "/saved-items", method = RequestMethod.GET)
+    public String savedItems() {
+        return "special/saved_items";
     }
 
 
@@ -111,7 +114,7 @@ public class HomeController {
 
 
 
-        @RequestMapping(value = "{slug}", method = RequestMethod.GET)
+    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
     public String page(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
         Page page = pageService.getBySlug(slug);
@@ -125,5 +128,12 @@ public class HomeController {
         model.addAttribute("page404", true);
         return "show_404";
     }
+
+
+
+
+
+
+
 
 }

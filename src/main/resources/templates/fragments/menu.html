@@ -24,20 +24,22 @@
                     </li>
                 </ul>
                 <form class="form-inline mt-2 mt-md-0">
-                    <i class="fas fa-heart pl-4"></i>
-                    <i class="fas fa-search pl-4" data-fa-transform="rotate-90" ></i>
+                    <a href="/saved-items"><i class="fas fa-heart pl-4"></i></a>
+                   <a href="#search"><i class="fas fa-search"></i></a>
                 </form>
             </div>
         </div>
     </nav>
 
-<!--<div id="search">-->
-    <!--<button type="button" class="close">×</button>-->
-    <!--<form action="/search">-->
-        <!--<input type="search" value="" placeholder="type keyword(s) here" name="q" />-->
-        <!--<button type="submit" class="btn btn-primary">Search</button>-->
-    <!--</form>-->
-<!--</div>-->
+<div id="search">
+
+    <i class="fas fa-times close"></i>
+
+    <form action="/search">
+        <input type="search" value="" placeholder="type keyword(s) here" name="q" autocomplete="off" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
 
 
 </div>

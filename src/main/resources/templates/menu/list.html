@@ -30,6 +30,7 @@
 
     <div class="view-block">
 
+
            <div class="row">
                <div class="col-md-4">
 
@@ -122,7 +123,7 @@
 
                                    <form th:object="${menu}" action="/admin/menu/create" method="POST">
 
-                                       <input type="hidden" name="type" value="post">
+                                       <input type="hidden" name="type" value="cat">
                                        <div class="form-group">
                                            <select class="form-control" th:field="${menu.slug}">
                                                <option th:each="category : ${categories}"
@@ -145,17 +146,6 @@
                        </div>
                    </div>
 
-
-
-
-
-
-
-
-
-
-
-
                </div>
 
                <div class="col-md-8">
@@ -166,12 +156,6 @@
                            <li th:each="menu : ${menuList}" class="menu_item"
                                th:attr="data-menu-id=${menu.id},data-parent-id=${menu.parent?.id}">
                                <span th:text="${menu.name}"></span>
-                               |
-                               <span class="pid">
-
-                               </span>
-
-
                                <span class="float-right">
                                    <i class="fas fa-trash-alt menu_delete"
                                       th:attr="data-menu-id=${menu.id}"></i>

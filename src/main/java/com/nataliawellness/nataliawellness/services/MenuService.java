@@ -46,4 +46,8 @@ public class MenuService {
     public Menu findBySlug(String slug) {
         return menuRepository.findBySlug(slug);
     }
+
+    public void save(Menu menu) {
+        menuRepository.save(menu);
+    }
 }
