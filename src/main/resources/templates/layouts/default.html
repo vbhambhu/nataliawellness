@@ -7,14 +7,19 @@
 
 
 <div class="container">
+    <th:block th:if="${nosidebar == null}">
     <div class="row">
         <div class="col-md-9" layout:fragment="content"></div>
         <div class="col-md-3">
-            <!--<th:block th:if="${nosidebar}">-->
             <div th:replace="fragments/sidebar :: home"></div>
-            <!--</th:block>-->
         </div>
     </div>
+    </th:block>
+
+
+    <th:block th:if="${nosidebar != null}">
+        <div layout:fragment="content"></div>
+    </th:block>
 
     <div th:replace="fragments/footer :: footer"></div>
 </div>

@@ -7,6 +7,7 @@ import com.nataliawellness.nataliawellness.entities.Subscription;
 import com.nataliawellness.nataliawellness.services.CategoryService;
 import com.nataliawellness.nataliawellness.services.PageService;
 import com.nataliawellness.nataliawellness.services.PostService;
+import com.nataliawellness.nataliawellness.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +22,35 @@ import javax.validation.Valid;
 @Controller
 public class SubscriptionController {
 
+    @Autowired
+    SubscriptionService subscriptionService;
+
+    @RequestMapping(value = "/subscribe", method = RequestMethod.GET)
+    public String subscribeUser(Model model) {
+        model.addAttribute("nosidebar", true);
+        return "special/subscribe";
+    }
+
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
     public String subscribeUser(Model model, @Valid Subscription subscription, BindingResult bindingResult) {
 
+        model.addAttribute("nosidebar", true);
 
-        return "special/home";
 
+        Subscription subscriptionDB = subscriptionService.findByEmail(subscription.getEmail());
+
+        if(subscriptionDB != null){
+            bindingResult.rejectValue("email", "email" , "Your email is already added to subscription list.");
+        }
+        if(bindingResult.hasErrors()){
+            return "special/subscribe";
+        }
+
+        subscriptionService.save(subscription);
+
+        model.addAttribute("successMsg", "Thank you! You have been successfully added to subscription list.");
+        return "special/subscribe";
     }
 
 

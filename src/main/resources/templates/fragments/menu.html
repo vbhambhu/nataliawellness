@@ -8,6 +8,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
                     <div th:each="menu : ${menuItems}">
                         <li class="nav-item" th:if="${menu.children.empty}">
                             <a class="nav-link" th:text="${menu.name}" th:href="${menu.slug}">link</a>
@@ -20,16 +23,25 @@
                         </li>
                     </div>
                     <li class="nav-item">
+                        <a class="nav-link" href="/shop">Shop</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/saved-items"><i class="fas fa-heart pl-4"></i></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#search"><i class="fas fa-search"></i></a>
+                    </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <a href="/saved-items"><i class="fas fa-heart pl-4"></i></a>
-                   <a href="#search"><i class="fas fa-search"></i></a>
-                </form>
+
             </div>
         </div>
     </nav>
+
+    <div id="top-shadow"></div>
 
 <div id="search">
 

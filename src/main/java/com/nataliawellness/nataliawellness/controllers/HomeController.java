@@ -34,9 +34,15 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public String contactPage() {
+    public String contactPage(Model model) {
+        model.addAttribute("nosidebar", true);
         return "special/contact";
+    }
 
+    @RequestMapping(value = "/shop", method = RequestMethod.GET)
+    public String shopPage(Model model) {
+        model.addAttribute("nosidebar", true);
+        return "special/shop";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -55,9 +61,19 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "/blog/{slug}", method = RequestMethod.GET)
+    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
     public String blogPost(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
+
+        Page page = pageService.getBySlug(slug);
+        if(page != null){
+            model.addAttribute("metaTitle", page.getTitle());
+            model.addAttribute("metaDescription", page.getMetaDescription());
+            model.addAttribute("page", page);
+            return "special/page";
+        }
+
+        
         //check for post
         Post post = postService.getBySlug(slug);
         if(post != null){
@@ -71,7 +87,7 @@ public class HomeController {
         return "show_404";
     }
 
-    @RequestMapping(value = "/category/{slug}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cat/{slug}", method = RequestMethod.GET)
     public String categoryChild(Model model, @PathVariable(name = "slug", required = false) String slug) {
 
 //        Category category = categoryService.findBySlug(slug);
@@ -117,20 +133,14 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
-    public String page(Model model, @PathVariable(name = "slug", required = false) String slug) {
-
-        Page page = pageService.getBySlug(slug);
-        if(page != null){
-            model.addAttribute("metaTitle", page.getTitle());
-            model.addAttribute("metaDescription", page.getMetaDescription());
-            model.addAttribute("page", page);
-            return "special/page";
-        }
-
-        model.addAttribute("page404", true);
-        return "show_404";
-    }
+//    @RequestMapping(value = "{slug}", method = RequestMethod.GET)
+//    public String page(Model model, @PathVariable(name = "slug", required = false) String slug) {
+//
+//
+//
+//        model.addAttribute("page404", true);
+//        return "show_404";
+//    }
 
 
 
