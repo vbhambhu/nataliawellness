@@ -5,9 +5,34 @@
 <div id="page" layout:fragment="content">
 
 
-   <h2>Search</h2>
+   <h2>Search Results</h2>
 
-    <p>Results here</p>
+  <div th:if="${posts.empty}">No results found</div>
+
+    <div th:each="post : ${posts}">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div th:block="${post.image}">
+                    <a th:href="@{'/blog/'} + ${post.slug}">
+                        <img class="img-fluid" th:src="${post.image}">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy')}"></div>
+                <div class="post-cat-wrapper" th:if="${!post.categories.empty}"  th:text="${post.categories[0].name}">...</div>
+                <h2 th:text="${post.title}"></h2>
+
+                <div th:utext="${post.metaDescription}"></div>
+                <p>&nbsp;</p>
+                <a th:href="@{'/blog/'} + ${post.slug}" class="btn btn-primary">Read more</a>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+
+    </div>
 
 </div>
 </body>

@@ -1,6 +1,7 @@
 package com.nataliawellness.nataliawellness.controlleradvices;
 
 
+import com.nataliawellness.nataliawellness.entities.Subscription;
 import com.nataliawellness.nataliawellness.repositories.MenuRepository;
 import com.nataliawellness.nataliawellness.services.MenuService;
 import com.nataliawellness.nataliawellness.services.PageService;
@@ -24,11 +25,11 @@ public class AppAdvice {
     private String imageCDN;
 
     @ModelAttribute
-    public void addAttributes(Model model) {
+    public void addAttributes(Model model, Subscription subscription) {
         model.addAttribute("menuItems", menuService.getSiteMenu());
         model.addAttribute("imageCDN", imageCDN);
         model.addAttribute("profile_page", pageService.getBySlug("profile"));
-
+        //model.addAttribute("subscription", subscription);
     }
 
 

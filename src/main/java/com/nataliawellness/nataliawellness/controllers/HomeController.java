@@ -40,8 +40,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String aboutPage(@RequestParam String q) {
+    public String aboutPage(@RequestParam String q, Model model) {
         System.out.println(q);
+
+        model.addAttribute("posts", postService.findTitleOrContentbyKeyword(q));
+
         return "special/search";
     }
 

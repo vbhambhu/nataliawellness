@@ -13,6 +13,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByTitleContaining(String query);
 
+
+    List<Post> findByTitleContainingOrContentContainingAndStatus(String q1, String q2, boolean status);
+
     Post findBySlug(String slug);
 
     List<Post> findBySlugIn(List<String> slugList);
@@ -20,6 +23,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByShowOnHomeEqualsAndStatus(boolean onHome, boolean status);
 
     List<Post> findAllByCategoriesContains(Category category);
+
+
+
 
 
 }

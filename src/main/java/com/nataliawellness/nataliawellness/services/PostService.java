@@ -125,6 +125,18 @@ public class PostService {
         return postRepository.findByTitleContaining(query);
     }
 
+
+    public List<Post> findTitleOrContentbyKeyword(String query) {
+
+        if(query == null || query.length() == 0) return null;
+
+        return postRepository.findByTitleContainingOrContentContainingAndStatus(query, query, true);
+    }
+
+
+
+
+
     public Post getBySlug(String slug) {
 
         return postRepository.findBySlug(slug);
