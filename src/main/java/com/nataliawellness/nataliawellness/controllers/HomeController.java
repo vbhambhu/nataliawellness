@@ -73,7 +73,7 @@ public class HomeController {
             return "special/page";
         }
 
-        
+
         //check for post
         Post post = postService.getBySlug(slug);
         if(post != null){
